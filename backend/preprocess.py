@@ -1,3 +1,4 @@
+from hinglish_normalizer import normalize_hinglish
 import pandas as pd
 import re
 
@@ -18,6 +19,7 @@ def clean_message(message):
 
     # Convert to lowercase
     message = message.lower()
+    message = normalize_hinglish(message)
 
     # Remove extra spaces
     message = message.strip()
