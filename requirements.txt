@@ -1,0 +1,13 @@
+transformers
+torch
+sentence-transformers
+bertopic
+umap-learn
+hdbscan
+networkx
+python-louvain
+emoji
+langdetect
+plotly
+sentencepiece
+tiktoken
