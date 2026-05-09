@@ -105,6 +105,10 @@ WhatsApp-Chat-Analyzer/
 
 ```bash
 git clone https://github.com/your-username/your-repository-name.git
+
+## Run the Project
+
+python -m streamlit run app.py
 ```
 
 ## Move Into Project Folder
