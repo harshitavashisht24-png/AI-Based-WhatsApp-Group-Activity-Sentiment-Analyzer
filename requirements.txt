@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 transformers
 torch
 sentence-transformers
@@ -11,3 +12,10 @@ langdetect
 plotly
 sentencepiece
 tiktoken
+=======
+pandas
+matplotlib
+textblob
+wordcloud
+streamlit
+>>>>>>> bccb0f0c575b7c16c090a3a59a0f8083c9f9799c

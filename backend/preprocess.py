@@ -1,4 +1,4 @@
-from hinglish_normalizer import normalize_hinglish
+from nlp_ai.hinglish_normalizer import normalize_hinglish
 import pandas as pd
 import re
 

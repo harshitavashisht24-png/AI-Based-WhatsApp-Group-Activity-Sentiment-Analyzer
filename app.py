@@ -44,19 +44,15 @@ col1, col2 = st.columns(2)
 
 with col1:
 
-    st.subheader("Total Messages")
-
     st.metric(
-        label="Messages",
+        label="Total Messages",
         value=df.shape[0]
     )
 
 with col2:
 
-    st.subheader("Unique Users")
-
     st.metric(
-        label="Users",
+        label="Unique Users",
         value=df["User"].nunique()
     )
 
@@ -207,6 +203,12 @@ st.markdown("""
 - Hinglish Text Understanding
 - WhatsApp Behavioral Intelligence
 
-Built using:
-Python, Streamlit, Transformers, NLP, Machine Learning
+### Technologies Used
+
+- Python
+- Streamlit
+- NLP
+- Transformers
+- Machine Learning
+- Pandas
 """)
