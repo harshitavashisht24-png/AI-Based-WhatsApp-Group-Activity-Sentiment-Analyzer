@@ -1,35 +1,50 @@
 import re
 import pandas as pd
 
-# Open WhatsApp chat file
-with open("data/sample_chat.txt", "r", encoding="utf-8") as file:
-    chat_data = file.readlines()
+def parse_chat_data(chat_input):
 
-# Empty list to store extracted messages
-messages = []
+    # Handle uploaded file
+    if hasattr(chat_input, "read"):
+        text = chat_input.read().decode("utf-8")
 
-# Regex pattern for WhatsApp messages
-pattern = r"(\d{1,2}/\d{1,2}/\d{2,4}),\s(\d{1,2}:\d{2}\s?[ap]m)\s-\s(.*?):\s(.*)"
+    # Handle direct chat text
+    elif isinstance(chat_input, str):
 
-# Extract data from each line
-for line in chat_data:
-    match = re.match(pattern, line)
+        # If it's a file path
+        if ".txt" in chat_input:
+            with open(chat_input, "r", encoding="utf-8") as f:
+                text = f.read()
 
-    if match:
-        date = match.group(1)
-        time = match.group(2)
-        user = match.group(3)
-        message = match.group(4)
+        # Otherwise raw chat content
+        else:
+            text = chat_input
 
-        messages.append([date, time, user, message])
+    else:
+        return pd.DataFrame(columns=["Date", "Time", "User", "Message"])
 
-# Create DataFrame
-df = pd.DataFrame(messages, columns=["Date", "Time", "User", "Message"])
+    # Split lines
+    chat_data = text.splitlines()
 
-# Print first 5 rows
-print(df.head())
+    messages = []
 
-# Save CSV file
-df.to_csv("output/chat_data.csv", index=False)
+    # Improved WhatsApp regex
+    pattern = r"(\d{1,2}/\d{1,2}/\d{2,4}),\s*(\d{1,2}:\d{2}\s?[ap]m)\s*-\s*(.*?):\s(.*)"
 
-print("\nChat data saved successfully!")
+    for line in chat_data:
+
+        # Remove special unicode spaces
+        line = line.replace("\u202f", " ")
+
+        match = re.match(pattern, line, re.IGNORECASE)
+
+        if match:
+            date = match.group(1)
+            time = match.group(2)
+            user = match.group(3)
+            message = match.group(4)
+
+            messages.append([date, time, user, message])
+
+    df = pd.DataFrame(messages, columns=["Date", "Time", "User", "Message"])
+
+    return df

@@ -1,48 +1,25 @@
-import pandas as pd
 from textblob import TextBlob
-import matplotlib.pyplot as plt
+import pandas as pd
 
-# Load cleaned chat data
-df = pd.read_csv("output/clean_chat_data.csv")
+def analyze_all_sentiments(df):
 
-# Function to analyze sentiment
-def get_sentiment(message):
+    sentiments = []
 
-    analysis = TextBlob(str(message))
+    for msg in df["Message"]:
 
-    polarity = analysis.sentiment.polarity
+        polarity = TextBlob(str(msg)).sentiment.polarity
 
-    if polarity > 0:
-        return "Positive"
+        if polarity > 0:
+            sentiment = "Positive"
 
-    elif polarity < 0:
-        return "Negative"
+        elif polarity < 0:
+            sentiment = "Negative"
 
-    else:
-        return "Neutral"
+        else:
+            sentiment = "Neutral"
 
-# Apply sentiment analysis
-df["Sentiment"] = df["Clean_Message"].apply(get_sentiment)
+        sentiments.append(sentiment)
 
-# Count sentiments
-sentiment_counts = df["Sentiment"].value_counts()
+    df["Sentiment"] = sentiments
 
-print("\nSENTIMENT ANALYSIS:")
-print(sentiment_counts)
-
-# Plot graph
-plt.figure(figsize=(6,6))
-
-sentiment_counts.plot(kind='pie', autopct='%1.1f%%')
-
-plt.title("Sentiment Distribution")
-
-plt.ylabel("")
-
-# Save graph
-plt.savefig("output/sentiment_analysis.png")
-
-plt.close()
-# Save updated CSV
-df.to_csv("output/final_chat_data.csv", index=False)
-print("Final CSV saved successfully!")
+    return df

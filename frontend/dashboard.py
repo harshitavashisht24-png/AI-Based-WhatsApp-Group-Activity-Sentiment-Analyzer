@@ -1,8 +1,11 @@
-import streamlit as st
-import pandas as pd
 import plotly.express as px
-import parser as p1
-import sentiment_analysis as p2
+import streamlit as st
+from backend import analytics
+from backend import preprocess
+from backend import topic_detection
+from backend import interaction_analysis
+from backend import parser as p1
+from backend import sentiment_analysis as p2
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(
