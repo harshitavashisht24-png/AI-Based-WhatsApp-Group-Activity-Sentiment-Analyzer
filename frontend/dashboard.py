@@ -4,8 +4,6 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import plotly.express as px
 import streamlit as st
-from backend import topic_detection
-from backend import interaction_analysis
 from backend import parser as p1
 from backend import sentiment_analysis as p2
 
