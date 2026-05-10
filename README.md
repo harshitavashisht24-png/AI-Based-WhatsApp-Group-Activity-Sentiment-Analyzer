@@ -202,3 +202,6 @@ output/
 # License
 
 This project is developed for educational and internship purposes.
+
+Live App:
+https://harshitavashisht24-png-ai-based-whatsa-frontenddashboard-pelrsh.streamlit.app/
