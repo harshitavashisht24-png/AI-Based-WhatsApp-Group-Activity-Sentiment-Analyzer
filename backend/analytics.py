@@ -1,7 +1,5 @@
 import pandas as pd
 
-# Load cleaned chat data
-df = pd.read_csv("output/clean_chat_data.csv")
 
 # Total messages
 total_messages = df.shape[0]
